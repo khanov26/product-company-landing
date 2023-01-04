@@ -1,0 +1,62 @@
+@use 'sass:math';
+@use '../mixins/media' as *;
+@use '../vars' as *;
+
+.clients {
+  padding: 40px 0;
+  .container {
+    display: flex;
+    flex-direction: column;
+    column-gap: 60px;
+    row-gap: 30px;
+
+    @include tablet {
+      flex-direction: row;
+    }
+  }
+
+  .content {
+    @include tablet {
+      width: math.div(340px, $containerWidth) * 100%;
+    }
+  }
+
+  p {
+    margin-top: 17px;
+    font-size: 18px;
+  }
+
+  .links {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(1, min-content);
+    justify-content: center;
+    align-items: center;
+    gap: 30px 60px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, min-content);
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(4, min-content);
+      justify-content: space-between;
+    }
+  }
+
+  a {
+    @media (hover: hover) {
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    
+
+    &.amazon {
+      transform: translateY(20%);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

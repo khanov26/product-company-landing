@@ -1,0 +1,247 @@
+@use '../mixins/media' as *;
+@use '../vars' as *;
+@use 'sass:math';
+
+.help {
+  padding: 93px 0 73px;
+  overflow-x: hidden;
+
+  @include desktop {
+    padding: 133px 0 73px;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 90px;
+    row-gap: 60px;
+
+    @include desktop {
+      flex-direction: row;
+    }
+
+    @include desktop {
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 69px;
+        width: 405px;
+        height: 154px;
+        background: url(images/dot_ornament.svg);
+        z-index: -1;
+      }
+    }
+
+    &::after {
+      --size: 120px;
+
+      content: '';
+      position: absolute;
+      right: 18px;
+      bottom: -70px;
+      width: var(--size);
+      height: var(--size);
+      border: 8.8px solid #ff007a;
+      border-radius: 50%;
+      z-index: -2;
+
+      @include desktop {
+        bottom: 15px;
+      }
+    }
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+
+    @include desktop {
+      width: math.div(400px, $containerWidth) * 100%;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      bottom: 37%;
+      width: var(--segment-size);
+      height: var(--segment-size);
+      border-top-left-radius: var(--segment-corner-radius);
+      background: var(--orange);
+      z-index: -1;
+
+      @include desktop {
+        left: -38px;
+      }
+    }
+
+    p {
+      margin-top: 30px;
+    }
+  }
+
+  .blocks {
+    position: relative;
+    display: grid;
+    gap: 30px;
+
+    @include tablet($mobileFirst: false) {
+      grid-template-rows: repeat(4, 1fr);
+      width: 100%;
+    }
+
+    @include laptop {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(2, 310px);
+      grid-template-rows: repeat(2, 380px);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: -30px;
+      right: -30px;
+      bottom: -30px;
+      border-top-left-radius: 50px;
+      background: #f4f9ff;
+      z-index: -1;
+
+      @include tablet {
+        border-top-left-radius: 70px;
+      }
+
+      @include desktop {
+        top: 61px;
+        left: -214px;
+        width: 1047px;
+        height: 619px;
+        border-top-left-radius: 150px;
+      }
+    }
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0 15px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    text-align: center;
+    transition: transform 0.3s;
+    transform: scale(var(--scale, 1)) translateY(var(--move, 0));
+
+    @include laptop {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 30px 20px;
+      padding: 20px;
+      border-radius: 40px;
+    }
+
+    @include desktop {
+      padding: 40px 30px;
+      gap: 30px;
+    }
+
+    &:hover {
+      --scale: 1.05;
+    }
+
+    &:nth-child(even) {
+      @include desktop {
+        --move: -74px;
+      }
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include tablet {
+        width: 80px;
+        height: 80px;
+      }
+
+      @include tablet($mobileFirst: false) {
+        grid-row-end: span 2;
+      }
+
+      @include laptop {
+        width: 101px;
+        height: 101px;
+      }
+
+      @include desktop {
+        width: 121px;
+        height: 121px;
+      }
+    }
+
+    svg {
+      width: math.div(74px, 121px) * 100%;
+      height: math.div(74px, 121px) * 100%;
+    }
+
+    &.idea .icon {
+      background: #f1f7ff;
+    }
+
+    &.financial .icon {
+      background: #fff7e3;
+    }
+
+    &.development .icon {
+      background: #fff2f8;
+    }
+
+    &.analysis .icon {
+      background: #deffee;
+    }
+
+    h4 {
+      font-size: 18px;
+      line-height: 1.25;
+
+      @include tablet {
+        font-size: 20px;
+      }
+
+      @include tablet($mobileFirst: false) {
+        align-self: end;
+      }
+
+      @include desktop {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      color: #757575;
+      font-size: 14px;
+
+      @include tablet {
+        font-size: 16px;
+      }
+
+      @include tablet($mobileFirst: false) {
+        grid-column-start: 2;
+        align-self: start;
+      }
+    }
+  }
+}

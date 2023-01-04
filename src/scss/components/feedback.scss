@@ -1,0 +1,269 @@
+@use 'sass:math';
+@use '../mixins/media' as *;
+@use '../vars' as *;
+
+.feedback {
+  padding: 90px 0 245px;
+  overflow-x: hidden;
+
+  @include tablet {
+    padding-bottom: 46px;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+
+    @include mobile {
+      justify-content: center;
+    }
+  }
+
+  h2,
+  p {
+    width: 100%;
+  }
+
+  p {
+    font-size: 18px;
+    margin-top: 17px;
+  }
+
+  .slider-wrapper {
+    position: relative;
+    margin-top: 83px;
+    width: 100%;
+
+    @include tablet {
+      width: 50%;
+    }
+
+    @include laptop {
+      width: 61%;
+    }
+
+    @include desktop {
+      width: math.div(860px, $containerWidth) * 100%;
+      margin-top: 113px;
+    }
+
+    &::before {
+      --size: 70px;
+
+      content: '';
+      position: absolute;
+      left: 25%;
+      bottom: 40px;
+      width: var(--size);
+      height: var(--size);
+      border: 8px solid #ff007a;
+      border-radius: 50%;
+      z-index: -1;
+
+      @include laptop {
+        --size: 90px;
+        left: -5px;
+      }
+
+      @include desktop {
+        --size: 120px;
+        bottom: 15px;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -10px;
+      width: 196px;
+      height: 154px;
+      background: url(images/dot_ornament.svg) left top;
+      z-index: -1;
+
+      @include laptop {
+        left: 100px;
+      }
+
+      @include desktop {
+        left: 240px;
+      }
+    }
+  }
+
+  .slider {
+    overflow: hidden;
+  }
+
+  .slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    text-align: left;
+
+    @include laptop {
+      flex-direction: row;
+    }
+
+    @include desktop {
+      gap: 65px;
+    }
+
+    img {
+      width: 50%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border-top-right-radius: 0;
+
+      @include tablet {
+        width: math.div(389px, 860px) * 100%;
+      }
+
+      @include tablet($mobileFirst: false) {
+        order: 1;
+      }
+    }
+
+    .text {
+      @include laptop {
+        transform: translateY(-35px);
+      }
+    }
+
+    h4 {
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-top: 21px;
+    }
+  }
+
+  .controls {
+    display: flex;
+    gap: 26px;
+    z-index: 10;
+
+    @include tablet($mobileFirst: false) {
+      margin-top: 30px;
+      justify-content: center;
+    }
+
+    @include laptop {
+      position: absolute;
+      left: 50%;
+      bottom: 40px;
+    }
+
+    @include desktop {
+      left: 389 + 65px;
+      bottom: 120px;
+    }
+
+    button {
+      --size: 16px;
+      --swiper-pagination-bullet-inactive-opacity: 1;
+
+      font-size: 0;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: #e7f0fc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover,
+      &.swiper-pagination-bullet-active {
+        background: var(--blue);
+      }
+    }
+  }
+
+  .chain {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0, 125px) scale(0.8);
+
+    @include tablet {
+      transform: translate(150px, 30px);
+    }
+
+    @include laptop {
+      transform: translate(168px, 30px);
+    }
+
+    img {
+      position: absolute;
+      border-radius: 50%;
+      width: var(--size);
+      height: var(--size);
+
+      &:nth-child(1) {
+        position: static;
+        --size: 120px;
+      }
+
+      &:nth-child(2) {
+        --size: 68px;
+        top: -107px;
+        left: 15px;
+      }
+
+      &:nth-child(3) {
+        --size: 54px;
+        top: -45px;
+        left: 126px;
+      }
+
+      &:nth-child(4) {
+        --size: 54px;
+        top: 42px;
+        left: 171px;
+      }
+
+      &:nth-child(5) {
+        --size: 68px;
+        top: 119px;
+        left: 104px;
+      }
+
+      &:nth-child(6) {
+        --size: 98px;
+        top: 149px;
+        left: -25px;
+      }
+
+      &:nth-child(7) {
+        --size: 68px;
+        top: 95px;
+        left: -123px;
+      }
+
+      &:nth-child(8) {
+        --size: 98px;
+        top: -51px;
+        left: -123px;
+      }
+    }
+
+    &::before {
+      --size: 184px;
+
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100px;
+      border-radius: 50%;
+      width: var(--size);
+      height: var(--size);
+      background: var(--orange);
+      z-index: -1;
+    }
+  }
+}

@@ -1,0 +1,134 @@
+@use 'sass:math';
+@use '../mixins/media' as *;
+@use '../vars' as *;
+
+.hero {
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+
+  @include desktop {
+    padding-bottom: 96px;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 95px;
+    row-gap: 30px;
+
+    @include laptop {
+      flex-direction: row;
+    }
+
+    &::after {
+      --width: 292px;
+
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: var(--width);
+      height: calc(154 / 404 * var(--width));
+      background-image: url(/images/dot_ornament.svg);
+      z-index: -1;
+
+      @include desktop {
+        --width: 404px;
+        left: -52px;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    flex-shrink: 0;
+
+    @include laptop {
+      width: math.div(475px, $containerWidth) * 100%;
+    }
+  }
+
+  p {
+    margin: 34px 0 28px;
+
+    @include desktop {
+      margin: 40px 0 33px;
+    }
+  }
+
+  .button {
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 500;
+
+    @include desktop {
+      font-size: 20px;
+    }
+  }
+
+  .right {
+    position: relative;
+
+    &::before {
+      --size: 90px;
+
+      content: '';
+      width: var(--size);
+      height: var(--size);
+      background: #dae9ff;
+      border-radius: 50%;
+      position: absolute;
+      top: -30px;
+      left: calc(var(--size) / -2);
+      z-index: -1;
+
+      @include tablet {
+        --size: 110px;
+        top: 0;
+      }
+
+      @include desktop {
+        --size: 129px;
+      }
+    }
+
+    &::after {
+      content: '';
+      width: var(--segment-size);
+      height: var(--segment-size);
+      background: var(--orange);
+      border-bottom-right-radius: var(--segment-corner-radius);
+      position: absolute;
+      bottom: calc(var(--segment-size) / -2);
+      right: 30px;
+      z-index: -1;
+
+      @include laptop {
+        right: 120px;
+      }
+    }
+  }
+
+  img {
+    border-bottom-left-radius: 100px;
+    max-height: 420px;
+
+    @include tablet($mobileFirst: false) {
+      max-width: 100%;
+    }
+
+    @include tablet {
+      border-bottom-left-radius: 200px;
+    }
+
+    @include desktop {
+      max-height: 512px;
+    }
+  }
+}
